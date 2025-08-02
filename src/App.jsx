@@ -5,6 +5,12 @@ const menuItems = [
   { name: 'Pav Bhaji', image: '/images/pavbhaji.jpg', price: '₹80' },
   { name: 'Dabeli', image: '/images/dabeli.jpg', price: '₹50' },
   { name: 'Vada Pav', image: '/images/vadapav.jpg', price: '₹40' },
+  { name: 'sevpuri', image: '/image/sevpuri.jpg', price: '₹60' },
+  { name: 'dahipuri', image: '/image/dahipuri.jpg', price: '₹80' },
+  { name: 'Puff', image: '/image/puff.jpg', price: '₹30' },
+  { name: 'samosa', image: '/image/samosa.jpg', price: '₹30' },
+  { name: 'cold coco', image: '/image/coco.jpg', price: '₹120' },
+  { name: 'ice cream', image: '/image/ice_cream.jpg', price: '₹30' },
 ];
 
 function App() {
@@ -42,3 +48,4 @@ function App() {
 
 
 export default App;
+
