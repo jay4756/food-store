@@ -1,6 +1,6 @@
 import './App.css'
 
-
+ {/* you can add more items*/}
 const menuItems = [
   { name: 'Pav Bhaji', image: '/images/pavbhaji.jpg', price: '₹80' },
   { name: 'Dabeli', image: '/images/dabeli.jpg', price: '₹50' },
@@ -39,5 +39,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
