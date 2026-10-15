@@ -1,0 +1,59 @@
+
+
+services:
+  # 1. MySQL Database Service
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Jay@2005
+      MYSQL_DATABASE: FOOD
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  # 2. Java Spring Boot Backend Service
+  backend:
+    build:
+      context: .
+      dockerfile: src/Dockerfile
+    container_name: springboot-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/FOOD?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Jay@2005
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    networks:
+      - app-network
+
+  # 3. React Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: react-frontend
+    restart: always
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+# ડેટાબેઝનો ડેટા કન્ટેનર ડિલીટ થયા પછી પણ સેવ રાખવા માટે વોલ્યુમ
+volumes:
+  db_data:
+
+# ત્રણેય સર્વિસિસ અંદરોઅંદર વાત કરી શકે તે માટે નેટવર્ક
+networks:
+  app-network:
+    driver: bridge
